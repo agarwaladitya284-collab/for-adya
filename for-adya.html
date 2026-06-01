@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Adya 💙</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16223f; --deep:#1d2f5e; --cobalt:#2f4c93; --corn:#4a6fd6;
+    --peri:#7a99ec; --mist:#bccbf6; --sky:#dbe6fb;
+    --leaf:#6f8f6a; --gold:#e0b357;
+    --text:#1c2a4d;
+    --shadow:18px 30px 60px -30px rgba(22,34,63,.5);
+    --serif:'Fraunces',Georgia,serif; --sans:'Mulish',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; font-family:var(--sans); color:var(--text);
+    background:
+      radial-gradient(1100px 700px at 84% -8%, rgba(74,111,214,.30), transparent 60%),
+      radial-gradient(1000px 820px at -10% 24%, rgba(47,76,147,.20), transparent 55%),
+      radial-gradient(900px 760px at 50% 112%, rgba(29,47,94,.20), transparent 60%),
+      linear-gradient(180deg,#eef3fe 0%, #dfe8fb 42%, #e9f0fe 100%);
+    overflow-x:hidden;
+  }
+  .bgblooms{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.22; filter:blur(1.5px);}
+  .bgblooms svg{position:absolute;}
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:2; opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .petals{position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden;}
+  .petal{position:absolute; top:-40px; will-change:transform;}
+
+  section{position:relative; z-index:3; max-width:940px; margin:0 auto; padding:12vh 28px;}
+  .reveal{opacity:0; transform:translateY(42px); transition:opacity 1.1s cubic-bezier(.2,.7,.2,1), transform 1.1s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1; transform:none;}
+  .d1{transition-delay:.12s;} .d2{transition-delay:.24s;} .d3{transition-delay:.36s;}
+
+  .kicker{letter-spacing:.42em; text-transform:uppercase; font-size:12px; font-weight:800; color:var(--cobalt);}
+  h1{font-family:var(--serif); font-weight:300; line-height:.95; color:var(--deep);}
+  h2{font-family:var(--serif); font-weight:500; font-size:clamp(30px,5vw,52px); line-height:1.05; color:var(--deep); margin:.12em 0 .5em;}
+  .script{font-style:italic; color:var(--cobalt);}
+  p{font-size:clamp(17px,2.05vw,20px); line-height:1.78; color:var(--text); font-weight:500; max-width:64ch;}
+  .lead{font-size:clamp(19px,2.4vw,23px); font-weight:600;}
+
+  /* frosted panel so text always reads over the busy background */
+  .panel{background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(244,247,254,.86)); border:1px solid rgba(122,153,236,.45); border-radius:26px; padding:clamp(28px,5vw,56px); box-shadow:var(--shadow); backdrop-filter:blur(10px);}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,.94), rgba(244,247,254,.88)); border:1px solid rgba(122,153,236,.5); border-radius:28px; padding:clamp(28px,5vw,58px); box-shadow:var(--shadow); backdrop-filter:blur(10px);}
+  .signoff{font-family:var(--serif); font-style:italic; font-size:clamp(22px,3vw,30px); color:var(--cobalt); font-weight:500;}
+
+  .divider{display:flex; justify-content:center; padding:1.5vh 0 0; position:relative; z-index:3;}
+  .divider svg{filter:drop-shadow(0 14px 22px rgba(29,47,94,.3));}
+
+  .hero{min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding-top:6vh;}
+  .hero .bloomrow{display:flex; align-items:flex-end; justify-content:center; margin-bottom:8px;}
+  .hero h1{font-size:clamp(66px,17vw,190px); letter-spacing:-.02em; margin:.05em 0 0;}
+  .hero .sub{font-family:var(--serif); font-style:italic; font-size:clamp(19px,3.4vw,32px); color:var(--cobalt); margin-top:.1em; font-weight:500;}
+  .hero .tiny{margin-top:1.5em; max-width:none; color:#2f4c93; font-weight:700; font-size:15px;}
+  .scrollcue{position:absolute; bottom:4.5vh; left:50%; transform:translateX(-50%); font-size:12px; letter-spacing:.3em; text-transform:uppercase; color:var(--cobalt); font-weight:700; animation:bob 2.4s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,10px);}}
+
+  .pull{font-family:var(--serif); font-weight:400; font-size:clamp(28px,5.6vw,60px); line-height:1.08; color:var(--deep); letter-spacing:-.01em; max-width:none;}
+  .pull em{font-style:italic; color:var(--cobalt);}
+
+  .stack p{margin:.6em 0;}
+
+  .affirm{list-style:none; padding:0; margin:8px 0 0;}
+  .affirm li{font-family:var(--serif); font-weight:400; font-size:clamp(20px,3vw,28px); color:var(--deep); line-height:1.38; padding:15px 0; border-bottom:1px solid rgba(122,153,236,.3);}
+  .affirm li:last-child{border-bottom:none;}
+  .affirm li b{font-style:italic; font-weight:600; color:var(--cobalt);}
+
+  .reasons{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:6px;}
+  .reason{background:rgba(255,255,255,.86); border:1px solid rgba(122,153,236,.4); border-radius:20px; padding:24px; box-shadow:0 14px 30px -22px rgba(22,34,63,.55);}
+  .reason .n{font-family:var(--serif); font-size:30px; color:var(--peri); line-height:1; font-weight:600;}
+  .reason p{font-size:16px; margin:.5em 0 0; line-height:1.62; font-weight:500;}
+
+  .lines{margin:6px 0 0;}
+  .lines .l{font-family:var(--serif); font-weight:400; font-size:clamp(19px,2.7vw,26px); color:var(--deep); line-height:1.4; padding:13px 0; border-bottom:1px dashed rgba(122,153,236,.4);}
+  .lines .l:last-child{border-bottom:none;}
+  .lines .l em{font-style:italic; color:var(--cobalt);}
+
+  .timeline{position:relative; margin-top:8px; padding-left:6px;}
+  .timeline::before{content:""; position:absolute; left:13px; top:8px; bottom:8px; width:3px; background:linear-gradient(180deg,var(--mist),var(--corn),var(--mist)); border-radius:3px;}
+  .stop{position:relative; padding:0 0 36px 54px;}
+  .stop .dot{position:absolute; left:-2px; top:2px; width:32px; height:32px;}
+  .stop .when{font-weight:800; letter-spacing:.1em; text-transform:uppercase; font-size:11.5px; color:var(--cobalt);}
+  .stop h3{font-family:var(--serif); font-weight:500; font-size:clamp(21px,3.2vw,29px); margin:.12em 0 .3em; color:var(--deep);}
+  .stop p{font-size:16.5px; margin:0; line-height:1.66; max-width:60ch; font-weight:500;}
+
+  .ask{text-align:center;}
+  .ask .card{display:inline-block; max-width:700px;}
+  .question{font-family:var(--serif); font-weight:400; font-size:clamp(34px,6.4vw,64px); line-height:1.06; color:var(--deep); margin:.08em 0;}
+  .buttons{position:relative; margin-top:38px; display:flex; gap:20px; justify-content:center; align-items:center; min-height:80px; flex-wrap:wrap;}
+  button{font-family:var(--sans); font-weight:800; border:none; cursor:pointer; border-radius:999px; padding:18px 46px; font-size:19px; transition:transform .18s ease, box-shadow .25s ease;}
+  #yes{color:#fff; background:linear-gradient(135deg,var(--cobalt),var(--corn)); box-shadow:0 18px 34px -14px rgba(47,76,147,.85);}
+  #yes:hover{transform:translateY(-3px) scale(1.04);}
+  #no{color:var(--deep); background:rgba(255,255,255,.9); border:1.5px solid var(--mist);}
+
+  .overlay{position:fixed; inset:0; z-index:50; display:none; align-items:center; justify-content:center; background:radial-gradient(circle at 50% 40%, rgba(47,76,147,.5), rgba(22,34,63,.82)); backdrop-filter:blur(8px);}
+  .overlay.show{display:flex;}
+  .pop{background:linear-gradient(180deg,#fff,#f1f5ff); border:1px solid rgba(122,153,236,.55); border-radius:30px; padding:46px 40px; text-align:center; box-shadow:0 40px 80px -30px rgba(22,34,63,.72); transform:scale(.7); opacity:0; transition:transform .5s cubic-bezier(.2,1.4,.4,1), opacity .4s ease; max-width:430px;}
+  .overlay.show .pop{transform:scale(1); opacity:1;}
+  .pop .emoji{font-size:84px; line-height:1; animation:wobble 1.6s ease-in-out infinite;}
+  @keyframes wobble{0%,100%{transform:rotate(-5deg) translateY(0);}50%{transform:rotate(5deg) translateY(-6px);}}
+  .pop .line{font-family:var(--serif); font-style:italic; font-size:34px; color:var(--cobalt); margin:.4em 0 .1em; font-weight:500;}
+  .pop small{display:block; color:#3a4a73; font-size:15px; margin-top:6px; font-weight:600;}
+  .pop .close{margin-top:22px; font-size:15px; padding:12px 30px; background:linear-gradient(135deg,var(--cobalt),var(--corn)); color:#fff; box-shadow:0 12px 24px -10px rgba(47,76,147,.85);}
+
+  .yescard{text-align:center;}
+  .yescard .big{font-family:var(--serif); font-weight:400; font-size:clamp(40px,9vw,90px); color:var(--deep); line-height:1;}
+  .yescard .line{font-family:var(--serif); font-style:italic; font-size:clamp(22px,3vw,30px); color:var(--cobalt); margin-top:.4em; font-weight:500;}
+  .hidden{display:none;}
+
+  footer{text-align:center; padding:50px 20px 90px; color:#3a4a73; font-size:13px; letter-spacing:.1em; font-weight:600; position:relative; z-index:3;}
+  @media (max-width:520px){ section{padding:11vh 22px;} .buttons{flex-direction:column;} }
+</style>
+</head>
+<body>
+
+<div class="bgblooms" id="bgblooms"></div>
+<div class="petals" id="petals"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="reveal in">
+    <div class="bloomrow">
+      <svg class="hg" width="120" height="120" viewBox="0 0 220 220" data-s=".5"></svg>
+      <svg class="hg" width="210" height="210" viewBox="0 0 220 220" data-s=".84"></svg>
+      <svg class="hg" width="120" height="120" viewBox="0 0 220 220" data-s=".5"></svg>
+    </div>
+    <div class="kicker">for the prettiest girl in the world</div>
+    <h1>Adya.</h1>
+    <div class="sub">meri jaan, baith ja, padh acche se — yeh poora tere liye banaya hai.</div>
+    <p class="tiny">(haan, hydrangeas. tere favourite. blue waale.)</p>
+  </div>
+  <div class="scrollcue">scroll ↓</div>
+</section>
+
+<div class="divider"><svg class="hg" width="84" height="84" viewBox="0 0 220 220" data-s=".34"></svg></div>
+
+<!-- LETTER OPEN -->
+<section>
+  <div class="reveal">
+    <div class="card stack">
+      <div class="kicker">honest to god</div>
+      <h2>I'm bad at long messages.<br><span class="script">you of all people know that.</span></h2>
+      <p>Aaj main woh nahi karunga. No "hmm", no "haan", no one-word reply. For once I'm typing the whole thing out, properly, because you deserve to read it and not just guess it from the way I act.</p>
+      <p>You're my words ki factory and I'm the guy who replies in three letters. So I sat down and wrote more than I've ever written in my life. Every line is true. Every line is you.</p>
+      <p class="lead">You are the one good decision I never overthought, jaan. Everything else I argue with myself over for hours. With you I just knew. Pehle din se. And I've only gotten more sure since.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><svg class="hg" width="84" height="84" viewBox="0 0 220 220" data-s=".34"></svg></div>
+
+<!-- SINCE WHEN -->
+<section>
+  <div class="reveal"><div class="kicker">since when</div></div>
+  <div class="reveal d1">
+    <div class="panel">
+      <p class="pull">It started with a random conversation on a <em>campus walkthrough.</em><br>Then it was just <em>mess, walks, and a Netflix password.</em><br>And then it was <em>everything.</em></p>
+    </div>
+  </div>
+  <div class="reveal d2">
+    <div class="panel stack" style="margin-top:18px;">
+      <p>Back then I had no clue what you'd become to me. You were bossing me around about which girls I should and shouldn't talk to, calling me at hours where normal log so jaate hain, telling me to come down because "jaldi aa". I'd grumble. Then I'd go. Har baar.</p>
+      <p>Somewhere in all those walks and 2am calls you stopped being a friend and became <em>the</em> person — the one I'd save the day's best story for, the one whose "main boli thi na" I stopped fighting, because fine, you're always right. I gave up that argument a long time ago.</p>
+      <p>I kept it hidden behind short replies for way too long. Not today. Today you get all of it.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><svg class="hg" width="84" height="84" viewBox="0 0 220 220" data-s=".34"></svg></div>
+
+<!-- AFFIRMATIONS -->
+<section>
+  <div class="reveal"><div class="kicker">things i should say out loud more</div>
+    <h2>Read these slow. <span class="script">Har ek sach hai.</span></h2>
+  </div>
+  <div class="reveal d1">
+    <div class="panel">
+      <ul class="affirm">
+        <li>You are the <b>prettiest girl in the world.</b> Not a line, not me being soft — a fact. Sabse pretty. Pakka.</li>
+        <li>You are the <b>smartest person I lose arguments to,</b> and I'd lose every single one again just to hear you say "main boli thi na".</li>
+        <li>You are the <b>strongest person I know.</b> What you carry, and still you stay this soft — that finishes me every time.</li>
+        <li>You are my <b>best friend before anything else.</b> Girlfriend, jaan, all of it comes after that.</li>
+        <li>You are the one I tell things I <b>don't even tell myself.</b></li>
+        <li>You are <b>never a burden.</b> Don't you dare ever say that to me again.</li>
+        <li>You are not "too much." You are <b>exactly enough,</b> and I want every bit of it.</li>
+        <li>You are the <b>home</b> I keep walking back to. Six months proved that the hard way.</li>
+        <li>You are the calm <b>and</b> the chaos. Same girl. Somehow. And I'd pick both over anyone's calm.</li>
+        <li>You are the easiest "yes" of my life and the hardest person to ever stop thinking about.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><svg class="hg" width="84" height="84" viewBox="0 0 220 220" data-s=".34"></svg></div>
+
+<!-- ABOUT THAT FACE -->
+<section>
+  <div class="reveal"><div class="kicker">about that face</div>
+    <h2>Let me be annoying about <span class="script">how pretty you are</span> for a second.</h2>
+  </div>
+  <div class="reveal d1">
+    <div class="panel">
+      <div class="lines">
+        <div class="l">"Prettiest girl in the world" isn't a compliment I give you. It's just <em>where I land</em> every time I look up and you're there.</div>
+        <div class="l">Your smile ends my whole argument. I forget the point. Har baar. It's embarrassing, honestly.</div>
+        <div class="l">I've seen you first thing in the morning, mid-fight, crying, half-asleep, sick — and pretty in every single one. That's not luck. That's <em>just you.</em></div>
+        <div class="l">Other people are good looking. You're the kind of pretty I had to sit down for. There's a difference and only you have it.</div>
+        <div class="l">And the best part isn't even the face, pagal. It's that the prettiest girl in the world also happens to be the one texting me paragraphs at 2am. How did I get that lucky.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><svg class="hg" width="84" height="84" viewBox="0 0 220 220" data-s=".34"></svg></div>
+
+<!-- WHY I LOVE YOU -->
+<section>
+  <div class="reveal"><div class="kicker">why i love you</div>
+    <h2>The full list is <span class="script">not measurable.</span><br>Here's the short version anyway.</h2>
+  </div>
+  <div class="reveal d1 reasons">
+    <div class="reason"><div class="n">i.</div><p>Because you're pretty in a way that makes me lose my point mid-sentence. Every time. Still.</p></div>
+    <div class="reason"><div class="n">ii.</div><p>Because you overthink everything and somehow still land on right. "Main boli thi na" — haan, you were. Always.</p></div>
+    <div class="reason"><div class="n">iii.</div><p>Because you write me paragraphs, I send back "hmm", and you love me through it. That's not normal. That's you.</p></div>
+    <div class="reason"><div class="n">iv.</div><p>Because you saw the version of me I was hiding and didn't flinch. You made me more honest, more focused, more me.</p></div>
+    <div class="reason"><div class="n">v.</div><p>Because you fight for me even when you're scared I'll leave. I'm not going anywhere, pagal. Pakka.</p></div>
+    <div class="reason"><div class="n">vi.</div><p>Because "aapko miss" isn't something I plan to say. It just happens, all day, even when I'm too lazy to type it.</p></div>
+    <div class="reason"><div class="n">vii.</div><p>Because you remind me to be soft and I remind you to take your dawai, and somehow that's the whole relationship and I love it.</p></div>
+    <div class="reason"><div class="n">viii.</div><p>Because you said you'd only ever ruin my life with marriage, mere alawa kisi ki nahi. Best thing anyone's ever said to me.</p></div>
+    <div class="reason"><div class="n">ix.</div><p>Because boring days became my favourite days the second they had you in them. Packing boxes, random calls, nothing days. All of it.</p></div>
+    <div class="reason"><div class="n">x.</div><p>Because no matter how bad the fight, my brain still ends the day on you. Tu hi default hai. Always have been.</p></div>
+  </div>
+</section>
+
+<div class="divider"><svg class="hg" width="84" height="84" viewBox="0 0 220 220" data-s=".34"></svg></div>
+
+<!-- HOW MUCH -->
+<section>
+  <div class="reveal">
+    <div class="card stack">
+      <div class="kicker">how much, exactly</div>
+      <h2>You asked me this on the 1st.<br>I said <span class="script">"not measurable."</span> You didn't buy it.</h2>
+      <p>So here it is where you can't twist it into "itna kam". I love you a stupid amount. The kind I can't put a number on, because numbers run out before I'm anywhere close to done.</p>
+      <p>I think about you when I'm coding, at parties, when I should be asleep, when I'm winning at something and the first thing I want is to tell you. You think I never missed my best friend in those six months? You think I didn't replay every good thing we had on a loop? Daily. Every single day.</p>
+      <p class="lead">I cannot exist properly without you. I tried it for half a year. It was the worst maths I've ever done and I got every answer wrong.</p>
+      <p>And don't you <em>ever</em> say me-not-having-you made my life better. Dont ever say that to me again. It didn't. Not for one second, not on the best day of those six months.</p>
+      <p>I'm obsessed with you in the most embarrassing way and I've made my peace with it. Your name does something to me on a screen. Your voice on call fixes a whole bad day. You walk in and my entire mood resets. I don't fight it anymore.</p>
+      <p>I want the boring stuff with you. The moving-house chaos. The "dawai khaya?" at 1am. The fights where you turn out right. The calls where I ramble like an idiot and you just let me. The whole unglamorous forever — I want it, with you, sirf tere saath.</p>
+      <div class="signoff">— tera, sirf tera. always.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><svg class="hg" width="84" height="84" viewBox="0 0 220 220" data-s=".34"></svg></div>
+
+<!-- ROADMAP -->
+<section>
+  <div class="reveal"><div class="kicker">our entire journey</div>
+    <h2>Everywhere we've already <span class="script">been.</span></h2>
+  </div>
+  <div class="reveal d1">
+    <div class="panel">
+    <div class="timeline" id="timeline">
+      <div class="stop"><svg class="dot hg" viewBox="0 0 220 220" data-s=".15"></svg><div class="when">Sept 2022 · where it started</div><h3>A random conversation on a campus walkthrough.</h3><p>No plan, no idea. Just talking. Then it became mess, walks, and a stolen Netflix password. Two people who had no clue what was coming for them.</p></div>
+
+      <div class="stop"><svg class="dot hg" viewBox="0 0 220 220" data-s=".15"></svg><div class="when">2022 – early 2025 · every single day</div><h3>Miles apart, talking like we weren't.</h3><p>Thousands of messages a month. Good mornings, good nights, dumb fights, jaan, jaan, jaan. You were my person and I was yours long before we were ever in the same room.</p></div>
+
+      <div class="stop"><svg class="dot hg" viewBox="0 0 220 220" data-s=".15"></svg><div class="when">early 2025 · the chapter we lost</div><h3>Six months of nothing.</h3><p>I messed up and it cost me you. I won't dress it up — it was my mistake and that's what I got for it. Worst stretch of my life, hands down.</p></div>
+
+      <div class="stop"><svg class="dot hg" viewBox="0 0 220 220" data-s=".15"></svg><div class="when">17 July 2025, 2 AM · you came back</div><h3>Three questions, and a whole second chance.</h3><p>You texted at 2am, said you'd regret it, said you'd block me again. You didn't. We found our way back. I'll be grateful for that 2am for the rest of my life.</p></div>
+
+      <div class="stop"><svg class="dot hg" viewBox="0 0 220 220" data-s=".15"></svg><div class="when">23 August 2025 · the first time we ever met</div><h3>And I got to hold that waist.</h3><p>After three years of calls and texts — finally you, real, in front of me. Magical, and I usually hate that word. I don't think I've ever been that nervous and that sure at the exact same time.</p></div>
+
+      <div class="stop"><svg class="dot hg" viewBox="0 0 220 220" data-s=".15"></svg><div class="when">24 August 2025 · the very next day, on call</div><h3>The cute rambling I couldn't stop.</h3><p>I called and just... didn't shut up. Missing you, can't-live-without-you, all of it spilling out at once. You let me ramble like an idiot. That's the day I stopped pretending it was anything less than everything.</p></div>
+
+      <div class="stop"><svg class="dot hg" viewBox="0 0 220 220" data-s=".15"></svg><div class="when">4 October 2025 · the truth</div><h3>I finally fessed up.</h3><p>Said the thing out loud, on call, that I'd hidden behind short replies for years. Scariest sentence of my life. Best one too.</p></div>
+
+      <div class="stop"><svg class="dot hg" viewBox="0 0 220 220" data-s=".15"></svg><div class="when">11 October 2025 · out of nowhere</div><h3>I randomly asked you to marry me.</h3><p>No ring, no plan, just me being me at the wrong-perfect time. And you said yes in a heartbeat. Bina ek second soche. I still think about how fast you said it.</p></div>
+
+      <div class="stop"><svg class="dot hg" viewBox="0 0 220 220" data-s=".15"></svg><div class="when">now · louder every month</div><h3>The most us we've ever been.</h3><p>Sach bata raha hu — if you measured the love in our chats month by month, it's tripled since you came back and climbed almost every month since. That's not me being sweet. That's just what's true.</p></div>
+
+      <div class="stop"><svg class="dot hg" viewBox="0 0 220 220" data-s=".18"></svg><div class="when">1 June 2026 · today</div><h3>So let me ask you properly.</h3><p>Not as a "hmm." Not as a one-word reply. For real, this time, in full sentences for once in my life. ↓</p></div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><svg class="hg" width="100" height="100" viewBox="0 0 220 220" data-s=".4"></svg></div>
+
+<!-- THE QUESTION -->
+<section class="ask" id="askSection">
+  <div class="reveal" id="askBlock">
+    <div class="card">
+      <svg class="hg" width="96" height="96" viewBox="0 0 220 220" data-s=".4" style="display:block;margin:0 auto 14px;"></svg>
+      <div class="kicker">one question, jaan</div>
+      <div class="question">Adya — will you be<br>my girlfriend?</div>
+      <p style="margin:14px auto 0;color:#3a4a73;max-width:none;font-weight:600;">(officially, properly, and no overthinking allowed)</p>
+      <div class="buttons">
+        <button id="yes">Yes 💙</button>
+        <button id="no">No</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal in hidden" id="yesBlock">
+    <div class="card yescard">
+      <div class="emoji" style="font-size:80px;animation:wobble 1.6s ease-in-out infinite;">🥹💙</div>
+      <div class="big">I knew it.</div>
+      <div class="line">Forever, meri jaan. Pakka. 🩵</div>
+      <p style="margin:18px auto 0;color:#3a4a73;max-width:none;font-weight:600;">Ab idhar aa. Aur haan — dawai khaya?</p>
+    </div>
+  </div>
+</section>
+
+<div class="overlay" id="overlay">
+  <div class="pop">
+    <div class="emoji">🥹</div>
+    <div class="line">Pakka meri jaan</div>
+    <small>nahi nahi, woh button tere liye kaam nahi karta. dusra waala dabaa 💙</small>
+    <button class="close" id="closePop">okay fine 🥺</button>
+  </div>
+</div>
+
+<footer>made for adya · with my whole heart · 💙</footer>
+
+<script>
+  function drawHydrangea(svg, S){
+    var blues=['#28469f','#2f4c93','#4a6fd6','#6f8fe6','#94adf0','#bccbf6'];
+    var cx=110, cy=104, h='';
+    h+='<path d="M110 150 q-5 30 -3 64" stroke="#5f7d59" stroke-width="4" fill="none"/>';
+    h+='<path d="M110 176 q-42 -4 -60 -34 q36 -6 60 14 z" fill="#6f8f6a" opacity=".9"/>';
+    h+='<path d="M110 186 q42 -2 62 -30 q-36 -8 -62 12 z" fill="#7c9b76" opacity=".9"/>';
+    var rings=[{r:0,n:1},{r:23,n:6},{r:45,n:11},{r:66,n:15},{r:86,n:18}];
+    rings.forEach(function(ring,ri){
+      for(var i=0;i<ring.n;i++){
+        var ang=(i/ring.n)*Math.PI*2 + ri*0.45;
+        var x=cx+Math.cos(ang)*ring.r*S;
+        var y=cy+Math.sin(ang)*ring.r*S*0.95;
+        var c=blues[(ri*3+i)%blues.length];
+        var r=11.5*S;
+        h+='<g transform="translate('+x+','+y+') rotate('+(ang*34)+')">';
+        for(var a=0;a<4;a++){
+          h+='<ellipse cx="0" cy="'+(-r*0.72)+'" rx="'+(r*0.5)+'" ry="'+(r*0.72)+'" fill="'+c+'" opacity=".96" transform="rotate('+(a*90)+')"/>';
+        }
+        h+='<circle r="'+(r*0.22)+'" fill="#fdf3cf"/></g>';
+      }
+    });
+    svg.innerHTML=h;
+  }
+  document.querySelectorAll('.hg').forEach(function(svg){
+    drawHydrangea(svg, parseFloat(svg.getAttribute('data-s'))||0.5);
+  });
+
+  (function(){
+    var c=document.getElementById('bgblooms');
+    var spots=[['5%','11%',360],['80%','7%',300],['86%','56%',340],['-5%','60%',320],['42%','88%',300],['60%','30%',240]];
+    spots.forEach(function(s){
+      var svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+      svg.setAttribute('viewBox','0 0 220 220');
+      svg.setAttribute('width',s[2]); svg.setAttribute('height',s[2]);
+      svg.style.left=s[0]; svg.style.top=s[1];
+      drawHydrangea(svg, (s[2]/220));
+      c.appendChild(svg);
+    });
+  })();
+
+  var petalColors=['#4a6fd6','#7a99ec','#bccbf6','#2f4c93','#94adf0'];
+  var pc=document.getElementById('petals');
+  function spawnPetal(burst){
+    var el=document.createElement('div'); el.className='petal';
+    var size=8+Math.random()*15;
+    var col=petalColors[Math.floor(Math.random()*petalColors.length)];
+    el.innerHTML='<svg width="'+(size*1.4)+'" height="'+(size*1.8)+'" viewBox="0 0 20 26"><path d="M10 0 C2 8 2 18 10 26 C18 18 18 8 10 0Z" fill="'+col+'"/><circle cx="10" cy="22" r="2" fill="#fdf3cf"/></svg>';
+    el.style.left=(Math.random()*window.innerWidth)+'px';
+    var dur=(burst?4:9)+Math.random()*7;
+    var drift=(Math.random()*240-120);
+    var rot=Math.random()*720-360;
+    pc.appendChild(el);
+    el.animate([
+      {transform:'translate(0,'+(burst?'-10vh':'-5vh')+') rotate(0deg)', opacity:0},
+      {opacity:.85, offset:.1},
+      {transform:'translate('+drift+'px, 110vh) rotate('+rot+'deg)', opacity:.2}
+    ],{duration:dur*1000, easing:'cubic-bezier(.4,.1,.5,1)'}).onfinish=function(){el.remove();};
+  }
+  for(var i=0;i<18;i++) setTimeout(spawnPetal, i*350);
+  setInterval(spawnPetal, 950);
+
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in'); });
+  },{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(function(el){ if(!el.classList.contains('in')) io.observe(el); });
+
+  var overlay=document.getElementById('overlay');
+  var noBtn=document.getElementById('no');
+  var yesBtn=document.getElementById('yes');
+  var dodges=0;
+  noBtn.addEventListener('mouseenter',function(){
+    if(dodges<4){ var dx=(Math.random()*170-85), dy=(Math.random()*70-35);
+      noBtn.style.transform='translate('+dx+'px,'+dy+'px)'; dodges++; }
+  });
+  noBtn.addEventListener('click',function(){ noBtn.style.transform=''; overlay.classList.add('show'); });
+  document.getElementById('closePop').addEventListener('click',function(){ overlay.classList.remove('show'); });
+  overlay.addEventListener('click',function(e){ if(e.target===overlay) overlay.classList.remove('show'); });
+  yesBtn.addEventListener('click',function(){
+    document.getElementById('askBlock').classList.add('hidden');
+    document.getElementById('yesBlock').classList.remove('hidden');
+    document.getElementById('yesBlock').scrollIntoView({behavior:'smooth',block:'center'});
+    for(var i=0;i<70;i++) setTimeout(function(){spawnPetal(true);}, i*55);
+  });
+</script>
+</body>
+</html>
